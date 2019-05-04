@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Pandeta</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top" onload="loadSelect()">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-text mx-3">Pandeta</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="instruction.html">
+          <i class="fas fa-fw fa-list-alt"></i>
+          <span>Instructions</span></a>
+      </li>
+      <hr class="sidebar-divider">
+
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+
+
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+            <div class="topbar-divider d-none d-sm-block"></div>
+          </ul>
+        </nav>
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <br>
+            <div class="alert alert-success" id="alert-msg" style="display:none">
+
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-xl-4">
+              <div class="form-group">
+                <legand for="area">Select Area</legand>
+                <select class="form-control form-control-user" onchange="createGraph(this);createBarGraph(this);"
+                  id="selectArea">
+                  <option>---------</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xl-4">
+              <div class="form-group">
+                <legand for="uploadfile">Upload CSV or JSON</legand>
+                <input type="file" id="uploadFile">
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <!-- Area Chart -->
+            <div class="col-xl-6 col-lg-7">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                      aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-header">Dropdown Header:</div>
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-area">
+                    <canvas id="myAreaChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Bar Chart -->
+            <div class="col-xl-6">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                </div>
+                <div class="card-body">
+                  <div class="chart-bar">
+                    <canvas id="myBarChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="jumbotron" style="display: none" id="out">
+            <h3>File Imported</h3>
+          </div>
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy;Pandeta 2019</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // The first entry will be label
+    // This will be the format if we extract the data from CSV
+    // This format can also be the output of HTML table to JSON format
+
+    //#### format1  #####
+    table_data = {
+      "area name": [2000, 2001, 2002, 2003, 2004],
+      "City of london": [410, 420, 440, 440, 430],
+      "Barking and Dagenham": [19400, 19200, 20170, 20880, 21150],
+      "Barnet": [22450, 22310, 24010, 24400, 24280],
+      "Bexley": [15010, 14570, 15490, 15650, 15470],
+      "Brent": [30740, 28590, 30170, 30400, 30200],
+      "Bromley": [18420, 17950, 19020, 19410, 19350],
+      "Camden": [25020, 23930, 25140, 25240, 25110],
+      "Croydon": [28400, 27280, 28730, 29140, 28870],
+      "Ealing": [30170, 28210, 29840, 29740, 29050],
+    };
+    // ### End of the format 1 #####
+
+    function isEmpty(obj) {
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key))
+          return false;
+      }
+      return true;
+    }
+
+    var fileInput = document.getElementById("uploadFile"),
+
+      readFile = function () {
+        var reader = new FileReader();
+        reader.onload = function () {
+          if (fileInput.files[0].name.indexOf('csv') > 0) {
+            document.getElementById('out').innerHTML += reader.result;
+            var csv_data = reader.result.split('\n');
+            var extracted_data = {};
+            for (var i = 0; i < csv_data.length; i++) {
+              line = csv_data[i].trim();
+              line = line.split(',');
+              key = line[0];
+              line.shift();
+              for (var j = 0; j < line.length; j++) {
+                line[j] = parseInt(line[j]);
+              }
+              extracted_data[key] = line;
+            }
+            if (!isEmpty(extracted_data)) {
+              table_data = extracted_data;
+              loadSelect();
+              document.getElementById('alert-msg').style.display = "block";
+              document.getElementById('alert-msg').innerHTML = "Data Loaded from the imported file"
+              document.getElementById('out').style.display = "block";
+            }
+          } else if (fileInput.files[0].name.indexOf('json') > 0) {
+            document.getElementById('out').innerHTML += reader.result;
+            extracted_data = JSON.parse(reader.result);
+            extracted_data = extracted_data.table_data;
+            if (!isEmpty(extracted_data)) {
+              table_data = extracted_data;
+              loadSelect();
+              document.getElementById('alert-msg').style.display = "block";
+              document.getElementById('alert-msg').innerHTML = "Data Loaded from the imported file"
+              document.getElementById('out').style.display = "block";
+            }
+          } else {
+            alert("File not CSV or JSON");
+          }
+        };
+        // start reading the file. When it is done, calls the onload event defined above.
+        reader.readAsBinaryString(fileInput.files[0]);
+      };
+
+    fileInput.addEventListener('change', readFile);
+
+    function extractArea(data) {
+      areas = Object.keys(data);
+      index = areas.indexOf("area name");
+      if (index > -1) {
+        areas.splice(index, 1)
+      } else {
+        alert("Please give the header information for labels as 'area name'")
+      }
+      return areas;
+    }
+
+    function extractXlabels(data) {
+      // Extract the 'Area Name' which contains the labels 
+      var xLabels = data["area name"];
+      return xLabels
+    }
+
+    function loadSelect() {
+      //Clear Existing Select options 
+      var select = document.getElementById("selectArea");
+      for (i = select.options.length - 1; i >= 0; i--) {
+        select.remove(i);
+      }
+      //Adding option to select area options
+      var option;
+      //Adding Null Option
+      option = document.createElement("option");
+      option.text = "--------";
+      select.add(option);
+
+      var areas = extractArea(table_data);
+      for (var i = 0; i < areas.length; i++) {
+        option = document.createElement("option");
+        option.text = areas[i];
+        select.add(option);
+      }
+    }
+
+    // Area Chart Example
+    function createGraph(element) {
+      var entry = element.value;
+      var ctx = document.getElementById("myAreaChart");
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: extractXlabels(table_data),
+          datasets: [{
+            label: "label",
+            lineTension: 0.3,
+            backgroundColor: "rgba(78, 115, 223, 0.05)",
+            borderColor: "rgba(78, 115, 223, 1)",
+            pointRadius: 3,
+            pointBackgroundColor: "rgba(78, 115, 223, 1)",
+            pointBorderColor: "rgba(78, 115, 223, 1)",
+            pointHoverRadius: 3,
+            pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+            pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+            pointHitRadius: 10,
+            pointBorderWidth: 2,
+            data: table_data[entry],
+          }],
+        },
+        options: {
+          maintainAspectRatio: false,
+          layout: {
+            padding: {
+              left: 10,
+              right: 25,
+              top: 25,
+              bottom: 0
+            }
+          },
+          scales: {
+            xAxes: [{
+              time: {
+                unit: 'date'
+              },
+              gridLines: {
+                display: false,
+                drawBorder: false
+              },
+              ticks: {
+                maxTicksLimit: 7
+              }
+            }],
+
+          },
+          legend: {
+            display: false
+          },
+
+        }
+      });
+
+    }
+
+    function createBarGraph(element) {
+      var entry = element.value;
+      var ctx = document.getElementById("myBarChart");
+      var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: extractXlabels(table_data),
+          datasets: [{
+            label: "label",
+            backgroundColor: "#4e73df",
+            hoverBackgroundColor: "#2e59d9",
+            borderColor: "#4e73df",
+            data: table_data[entry],
+          }],
+        },
+        options: {
+          maintainAspectRatio: false,
+          layout: {
+            padding: {
+              left: 10,
+              right: 25,
+              top: 25,
+              bottom: 0
+            }
+          },
+          scales: {
+            xAxes: [{
+              time: {
+                unit: 'month'
+              },
+              gridLines: {
+                display: false,
+                drawBorder: false
+              },
+              ticks: {
+                maxTicksLimit: 6
+              },
+              maxBarThickness: 25,
+            }],
+
+          },
+          legend: {
+            display: false
+          },
+        }
+      });
+
+    }
+  </script>
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/chart-pie-demo.js"></script>
+
+</body>
+
+</html>
