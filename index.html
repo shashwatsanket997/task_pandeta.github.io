@@ -317,6 +317,9 @@
     function createGraph(element) {
       var entry = element.value;
       var ctx = document.getElementById("myAreaChart");
+      if (myLineChart) {
+        myLineChart.destroy();
+      }
       var myLineChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -375,6 +378,9 @@
     function createBarGraph(element) {
       var entry = element.value;
       var ctx = document.getElementById("myBarChart");
+      if (myBarChart) {
+        myBarChart.destroy();
+      }
       var myBarChart = new Chart(ctx, {
         type: 'bar',
         data: {
